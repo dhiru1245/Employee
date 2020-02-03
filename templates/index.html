@@ -1,0 +1,99 @@
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Emloyee Details</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div class="container ">
+<div class="col-lg-8 m-auto d-block" >
+<div class="jumbotron">
+    <h2>Please Enter Your Details..</h2>
+    <form method="post" class="post-form" action="/emp" >
+    {% csrf_token %}
+
+{#   {{ form.as_table }}#}
+        <div class="row">
+            <div class="col-md-6">
+                {{form.name|as_crispy_field}}
+                <h5 id="Emp_name"></h5>
+            </div>
+            <div class="col-md-6">
+                {{form.Pan_number|as_crispy_field}}
+
+                <h5 id="Emp_Pno"></h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                {{form.age|as_crispy_field}}
+                <h5 id="Emp_agee"></h5>
+            </div>
+            <div class="col-md-6">
+                {{form.gender|as_crispy_field}}
+                <h5 id="Emp_gen"></h5>
+            </div>
+        </div><div>
+             {{form.email|as_crispy_field}}
+             {{ form.email.errors }}
+        <h5 id="Emp_email"></h5>
+        </div><div>
+              {{form.city|as_crispy_field}}
+        <h5 id="Emp_city"></h5>
+        </div>
+        <div class="form-group-row">
+            <label class="col-sm-1 col-form-label"></label>
+            <div class="col-sm-4">
+              <button  class="btn btn-success btn-float-left" type="submit" >Add</button>
+            </div>
+        </div>
+
+
+    </form>
+</div>
+</div>
+</div>
+<div><center>
+    <h4>Employee Information Dash Board</h4>
+    <table border="2"  >
+        <thead style="background-color: gold">
+        <th>Emp No</th>
+        <th>Name</th>
+        <th>Pan No</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Email</th>
+        <th>City</th>
+        <th>Action</th>
+        </thead>
+        {% for i in x %}
+        <tr>
+            <td>{{ i.eno }}</td>
+            <td>{{ i.ename }}</td>
+
+            <td>{{ i.pan_no }}</td>
+            <td>{{ i.age }}</td>
+            <td>{{ i.gender }}</td>
+            <td>{{ i.email }}</td>
+            <td>{{ i.city_name }}</td>
+            <td><a href="/edit/{{ i.id }}">Edit</a>
+                <a href="/delete/{{ i.id }}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+     </table><br><br></center>
+ </div>
+
+
+
+</body>
+</html>/
